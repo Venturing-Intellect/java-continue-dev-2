@@ -1,9 +1,8 @@
-// customer-feedback-frontend/src/components/FeedbackForm.tsx
-
 import React, { useState } from 'react';
 import axios from 'axios';
 
 const FeedbackForm: React.FC = () => {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [content, setContent] = useState('');
   const [message, setMessage] = useState('');
@@ -12,9 +11,10 @@ const FeedbackForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post('/api/feedback', { email, content });
+      await axios.post('/api/feedback', { name, email, content });
       setMessage('Feedback submitted successfully!');
       setIsError(false);
+      setName('');
       setEmail('');
       setContent('');
     } catch (error) {
@@ -27,6 +27,17 @@ const FeedbackForm: React.FC = () => {
     <div className="card">
       <div className="card-body">
         <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label htmlFor="name" className="form-label">Name</label>
+            <input
+              type="text"
+              className="form-control"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
           <div className="mb-3">
             <label htmlFor="email" className="form-label">Email address</label>
             <input

@@ -25,7 +25,7 @@ class FeedbackServiceTest {
     @Test
     void submitFeedback_shouldSaveFeedback() {
         // Given
-        Feedback feedback = new Feedback("test@example.com", "Test feedback");
+        Feedback feedback = new Feedback("name", "test@example.com", "Test feedback");
 
         // When
         feedbackService.submitFeedback(feedback);

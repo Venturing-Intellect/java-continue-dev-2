@@ -10,6 +10,9 @@ public class FeedbackEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = true)
+    private String name;
+
     @Column(nullable = false)
     private String email;
 
@@ -19,7 +22,8 @@ public class FeedbackEntity {
     public FeedbackEntity() {
     }
 
-    public FeedbackEntity(String email, String content) {
+    public FeedbackEntity(String name, String email, String content) {
+        this.name = name;
         this.email = email;
         this.content = content;
     }
@@ -47,4 +51,12 @@ public class FeedbackEntity {
     public void setContent(String content) {
         this.content = content;
     }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }

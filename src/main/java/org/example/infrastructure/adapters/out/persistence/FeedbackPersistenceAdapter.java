@@ -16,8 +16,10 @@ class FeedbackPersistenceAdapter implements SaveFeedbackPort {
     @Override
     public void save(Feedback feedback) {
         FeedbackEntity entity = new FeedbackEntity();
+        entity.setName(feedback.getName());
         entity.setEmail(feedback.getEmail());
         entity.setContent(feedback.getContent());
         repository.save(entity);
     }
+
 }

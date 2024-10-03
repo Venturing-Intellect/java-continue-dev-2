@@ -30,7 +30,7 @@ class FeedbackControllerIntegrationTest {
     @Test
     void submitFeedback_withValidRequest_shouldReturnOk() throws Exception {
         // Given
-        FeedbackController.FeedbackRequest request = new FeedbackController.FeedbackRequest("test@example.com", "Test feedback");
+        FeedbackController.FeedbackRequest request = new FeedbackController.FeedbackRequest("John Doe", "test@example.com", "Test feedback");
 
         // When & Then
         mockMvc.perform(post("/api/feedback")
@@ -43,7 +43,7 @@ class FeedbackControllerIntegrationTest {
     @Test
     void submitFeedback_withInvalidEmail_shouldReturnBadRequest() throws Exception {
         // Given
-        FeedbackController.FeedbackRequest request = new FeedbackController.FeedbackRequest("invalid-email", "Test feedback");
+        FeedbackController.FeedbackRequest request = new FeedbackController.FeedbackRequest("John Doe", "invalid-email", "Test feedback");
 
         // When & Then
         mockMvc.perform(post("/api/feedback")
@@ -56,7 +56,7 @@ class FeedbackControllerIntegrationTest {
     @Test
     void submitFeedback_withBlankContent_shouldReturnBadRequest() throws Exception {
         // Given
-        FeedbackController.FeedbackRequest request = new FeedbackController.FeedbackRequest("test@example.com", "");
+        FeedbackController.FeedbackRequest request = new FeedbackController.FeedbackRequest("John Doe", "test@example.com", "");
 
         // When & Then
         mockMvc.perform(post("/api/feedback")
@@ -76,7 +76,7 @@ class FeedbackControllerIntegrationTest {
             "_______@example.com"
     })
     void submitFeedback_withValidEmail_shouldReturnOk(String email) throws Exception {
-        FeedbackController.FeedbackRequest request = new FeedbackController.FeedbackRequest(email, "Test feedback");
+        FeedbackController.FeedbackRequest request = new FeedbackController.FeedbackRequest("John Doe", email, "Test feedback");
 
         mockMvc.perform(post("/api/feedback")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -103,7 +103,7 @@ class FeedbackControllerIntegrationTest {
             "Abc..123@example.com"
     })
     void submitFeedback_withInvalidEmail_shouldReturnBadRequest(String email) throws Exception {
-        FeedbackController.FeedbackRequest request = new FeedbackController.FeedbackRequest(email, "Test feedback");
+        FeedbackController.FeedbackRequest request = new FeedbackController.FeedbackRequest("John Doe", email, "Test feedback");
 
         mockMvc.perform(post("/api/feedback")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -111,6 +111,4 @@ class FeedbackControllerIntegrationTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(content().string("Invalid input: Invalid email format"));
     }
-
-
 }
